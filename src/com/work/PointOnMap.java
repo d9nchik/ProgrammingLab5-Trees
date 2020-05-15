@@ -2,7 +2,7 @@ package com.work;
 
 import java.io.Serializable;
 
-public class Node implements DistanceCalculable<Node>, Serializable {//Class should be immutable
+public class PointOnMap implements DistanceCalculable<PointOnMap>, Serializable {//Class should be immutable
     private final double lat;
     private final double lon;
     private final String type;
@@ -10,7 +10,7 @@ public class Node implements DistanceCalculable<Node>, Serializable {//Class sho
     private final String name;
     private final String address;
 
-    public Node(double lat, double lon, String type, String subType, String name, String address) {
+    public PointOnMap(double lat, double lon, String type, String subType, String name, String address) {
         this.lat = lat;
         this.lon = lon;
         this.type = type;
@@ -47,9 +47,9 @@ public class Node implements DistanceCalculable<Node>, Serializable {//Class sho
      * Distance is the main part of our task
      */
     @Override
-    public double distance(Node node) {
+    public double distance(PointOnMap pointOnMap) {
         //We know lat and lon, so we will use "harvesine"
-        return harvesine(lat, lon, node.lat, node.lon);
+        return harvesine(lat, lon, pointOnMap.lat, pointOnMap.lon);
     }
 /**
  * Additional information is here: http://www.movable-type.co.uk/scripts/latlong.html
