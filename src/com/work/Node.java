@@ -31,7 +31,7 @@ public class Node extends AbstractNode {
 
 
     public AbstractNode[] addNode(AbstractNode node) {
-        if (counter == 1) {
+        if (counter == 0) {
             abstractNodes[counter++] = node;
             centralNode = node;
         } else {
