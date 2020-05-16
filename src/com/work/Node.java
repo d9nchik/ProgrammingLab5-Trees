@@ -1,8 +1,7 @@
 package com.work;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class Node extends AbstractNode {
@@ -35,9 +34,8 @@ public class Node extends AbstractNode {
             abstractNodes[counter++] = node;
             centralNode = node;
         } else {
+            radius = Math.max(centralNode.distance(node), radius);
             if (!(abstractNodes[0] instanceof Node)) {
-                double tempRadius = centralNode.distance(node);
-                radius = Math.max(tempRadius, radius);
                 abstractNodes[counter++] = node;
             } else {
                 int positionOfChoice = 0;
@@ -45,8 +43,7 @@ public class Node extends AbstractNode {
                     if (abstractNodes[i].distance(node) < abstractNodes[positionOfChoice].distance(node))
                         positionOfChoice = i;
                 }
-                double tempRadius = centralNode.distance(node);
-                radius = Math.max(tempRadius, radius);
+
                 AbstractNode[] nodes = ((Node) abstractNodes[positionOfChoice]).addNode(node);
                 if (nodes != null) {
                     abstractNodes[positionOfChoice] = new Node(nodes, 0, 3);
@@ -61,8 +58,8 @@ public class Node extends AbstractNode {
                     AbstractNode[] temp = new AbstractNode[MAXIMUM_POINTS + 1];
                     temp[0] = new Node(abstractNodes, 0, 3);
                     temp[1] = new Node(abstractNodes, 3, 5);
-                    counter=2;
-                    abstractNodes=temp;
+                    counter = 2;
+                    abstractNodes = temp;
                 }
             }
         }
@@ -85,5 +82,22 @@ public class Node extends AbstractNode {
         if (centralNode != null)
             return centralNode.getLon();
         return 0;
+    }
+
+    @Override
+    public double getRadius() {
+        return radius;
+    }
+
+    public ArrayList<AbstractNode> getValues(AbstractNode abstractNode) {
+        ArrayList<AbstractNode> abstractNodeArrayList = new ArrayList<AbstractNode>();
+        for (int i = 0; i < counter; i++) {
+            if (abstractNodes[i] instanceof Node) {
+                if (abstractNodes[i].distance(abstractNode) <= abstractNodes[i].getRadius() + abstractNode.getRadius())
+                    abstractNodeArrayList.addAll(((Node) abstractNodes[i]).getValues(abstractNode));
+            } else if (abstractNodes[i].distance(abstractNode) < abstractNode.getRadius())
+                abstractNodeArrayList.add(abstractNodes[i]);
+        }
+        return abstractNodeArrayList;
     }
 }

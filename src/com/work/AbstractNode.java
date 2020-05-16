@@ -28,4 +28,5 @@ public abstract class AbstractNode implements DistanceCalculable<AbstractNode>, 
 
     protected abstract double getLat();
     protected abstract  double getLon();
+    protected abstract double getRadius();
 }
