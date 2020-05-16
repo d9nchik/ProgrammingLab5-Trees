@@ -49,4 +49,16 @@ public class PointOnMap extends AbstractNode{//Class should be immutable
     protected double getRadius() {
         return 0;
     }
+
+    @Override
+    public String toString() {//TODO: make it better
+        return "PointOnMap{" +
+                "lat=" + lat +
+                ", lon=" + lon +
+                ", type='" + type + '\'' +
+                ", subType='" + subType + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }
