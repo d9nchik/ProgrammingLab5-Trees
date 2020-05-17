@@ -1,6 +1,5 @@
 package com.work;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -16,6 +15,7 @@ public class Node implements DistanceCalculable{
     public Node() {
     }
 
+    @SuppressWarnings("unused")
     public Node(DistanceCalculable[] nodes) {
         for (DistanceCalculable distanceCalculable : nodes)
             addNode(distanceCalculable);

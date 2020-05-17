@@ -1,7 +1,5 @@
 package com.work;
 
-import java.io.Serializable;
-
 public class SimpleCirclePoint implements DistanceCalculable{
     private final double lat;
     private final double lon;

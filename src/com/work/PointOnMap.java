@@ -1,7 +1,6 @@
 package com.work;
 
-import java.io.Serializable;
-
+@SuppressWarnings("unused")
 public class PointOnMap implements DistanceCalculable{//Class should be immutable
     private final double lat;
     private final double lon;
