@@ -2,7 +2,7 @@ package com.work;
 
 import java.io.Serializable;
 
-public class PointOnMap extends AbstractNode{//Class should be immutable
+public class PointOnMap implements DistanceCalculable{//Class should be immutable
     private final double lat;
     private final double lon;
     private final String type;
@@ -46,7 +46,7 @@ public class PointOnMap extends AbstractNode{//Class should be immutable
     }
 
     @Override
-    protected double getRadius() {
+    public double getRadius() {
         return 0;
     }
 

@@ -1,13 +1,14 @@
 package com.work;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Node extends AbstractNode {
-    private final static int MAXIMUM_POINTS = 4;
-    private AbstractNode[] abstractNodes = new AbstractNode[MAXIMUM_POINTS + 1];
-    private AbstractNode centralNode;
+public class Node implements DistanceCalculable{
+    private final static int MAXIMUM_POINTS = 50;//BTree is cool, is it?
+    private DistanceCalculable[] abstractNodes = new DistanceCalculable[MAXIMUM_POINTS + 1];
+    private DistanceCalculable centralNode;
     private boolean root = true;
     private double radius = 0;
     private int counter = 0;
@@ -15,13 +16,13 @@ public class Node extends AbstractNode {
     public Node() {
     }
 
-    public Node(AbstractNode[] nodes) {
-        for (AbstractNode abstractNode : nodes)
-            addNode(abstractNode);
+    public Node(DistanceCalculable[] nodes) {
+        for (DistanceCalculable distanceCalculable : nodes)
+            addNode(distanceCalculable);
         this.root = false;
     }
 
-    protected Node(AbstractNode[] nodes, int from, int to) {
+    protected Node(DistanceCalculable[] nodes, int from, int to) {
         for (int i = from; i < to; i++) {
             addNode(nodes[i]);
         }
@@ -29,7 +30,7 @@ public class Node extends AbstractNode {
     }
 
 
-    public AbstractNode[] addNode(AbstractNode node) {
+    public DistanceCalculable[] addNode(DistanceCalculable node) {
         if (counter == 0) {
             abstractNodes[counter++] = node;
             centralNode = node;
@@ -44,7 +45,7 @@ public class Node extends AbstractNode {
                         positionOfChoice = i;
                 }
 
-                AbstractNode[] nodes = ((Node) abstractNodes[positionOfChoice]).addNode(node);
+                DistanceCalculable[] nodes = ((Node) abstractNodes[positionOfChoice]).addNode(node);
                 if (nodes != null) {
                     abstractNodes[positionOfChoice] = new Node(nodes, 0, 3);
                     abstractNodes[counter++] = new Node(nodes, 3, 5);
@@ -55,10 +56,10 @@ public class Node extends AbstractNode {
                 if (!root)
                     return abstractNodes;
                 else {
-                    AbstractNode[] temp = new AbstractNode[MAXIMUM_POINTS + 1];
-                    temp[0] = new Node(abstractNodes, 0, 3);
-                    temp[1] = new Node(abstractNodes, 3, 5);
-                    counter = 2;
+                    DistanceCalculable[] temp = new DistanceCalculable[MAXIMUM_POINTS + 1];
+                    temp[0] = new Node(abstractNodes, 0, MAXIMUM_POINTS/2+1);
+                    temp[1] = new Node(abstractNodes, MAXIMUM_POINTS/2+1, MAXIMUM_POINTS);
+                    counter=2;
                     abstractNodes = temp;
                 }
             }
@@ -71,14 +72,14 @@ public class Node extends AbstractNode {
     }
 
     @Override
-    protected double getLat() {
+    public double getLat() {
         if (centralNode != null)
             return centralNode.getLat();
         return 0;
     }
 
     @Override
-    protected double getLon() {
+    public double getLon() {
         if (centralNode != null)
             return centralNode.getLon();
         return 0;
@@ -89,13 +90,13 @@ public class Node extends AbstractNode {
         return radius;
     }
 
-    public ArrayList<AbstractNode> getValues(AbstractNode abstractNode) {
-        ArrayList<AbstractNode> abstractNodeArrayList = new ArrayList<AbstractNode>();
+    public ArrayList<DistanceCalculable> getValues(DistanceCalculable distanceCalculable) {
+        ArrayList<DistanceCalculable> abstractNodeArrayList = new ArrayList<>();
         for (int i = 0; i < counter; i++) {
             if (abstractNodes[i] instanceof Node) {
-                if (abstractNodes[i].distance(abstractNode) <= abstractNodes[i].getRadius() + abstractNode.getRadius())
-                    abstractNodeArrayList.addAll(((Node) abstractNodes[i]).getValues(abstractNode));
-            } else if (abstractNodes[i].distance(abstractNode) < abstractNode.getRadius())
+                if (abstractNodes[i].distance(distanceCalculable) <= abstractNodes[i].getRadius() + distanceCalculable.getRadius())
+                    abstractNodeArrayList.addAll(((Node) abstractNodes[i]).getValues(distanceCalculable));
+            } else if (abstractNodes[i].distance(distanceCalculable) < distanceCalculable.getRadius())
                 abstractNodeArrayList.add(abstractNodes[i]);
         }
         return abstractNodeArrayList;

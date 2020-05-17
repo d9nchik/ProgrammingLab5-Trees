@@ -1,6 +1,8 @@
 package com.work;
 
-public class SimpleCirclePoint extends AbstractNode{
+import java.io.Serializable;
+
+public class SimpleCirclePoint implements DistanceCalculable{
     private final double lat;
     private final double lon;
     private final double radius;
