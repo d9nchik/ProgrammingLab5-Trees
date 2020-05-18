@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class Node implements DistanceCalculable{
-    private final static int MAXIMUM_POINTS = 50;//BTree is cool, is it?
+    private final static int MAXIMUM_POINTS = 500;//BTree is cool, is it?
     private DistanceCalculable[] abstractNodes = new DistanceCalculable[MAXIMUM_POINTS + 1];
     private DistanceCalculable centralNode;
     private boolean root = true;
@@ -47,8 +47,8 @@ public class Node implements DistanceCalculable{
 
                 DistanceCalculable[] nodes = ((Node) abstractNodes[positionOfChoice]).addNode(node);
                 if (nodes != null) {
-                    abstractNodes[positionOfChoice] = new Node(nodes, 0, 3);
-                    abstractNodes[counter++] = new Node(nodes, 3, 5);
+                    abstractNodes[positionOfChoice] = new Node(nodes, 0, MAXIMUM_POINTS / 2 + 1);
+                    abstractNodes[counter++] = new Node(nodes, MAXIMUM_POINTS / 2 + 1, MAXIMUM_POINTS);
                 }
             }
             if (counter > MAXIMUM_POINTS) {
@@ -94,7 +94,8 @@ public class Node implements DistanceCalculable{
         ArrayList<DistanceCalculable> abstractNodeArrayList = new ArrayList<>();
         for (int i = 0; i < counter; i++) {
             if (abstractNodes[i] instanceof Node) {
-                if (abstractNodes[i].distance(distanceCalculable) <= abstractNodes[i].getRadius() + distanceCalculable.getRadius())
+                if (abstractNodes[i].distance(distanceCalculable) <= abstractNodes[i].getRadius()
+                        + distanceCalculable.getRadius())
                     abstractNodeArrayList.addAll(((Node) abstractNodes[i]).getValues(distanceCalculable));
             } else if (abstractNodes[i].distance(distanceCalculable) < distanceCalculable.getRadius())
                 abstractNodeArrayList.add(abstractNodes[i]);

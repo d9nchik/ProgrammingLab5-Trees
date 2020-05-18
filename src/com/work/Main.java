@@ -9,6 +9,6 @@ public class Main {
         //TODO: test ability of serializing structure
         assert node != null;
         System.out.println(node.getValues(
-                new SimpleCirclePoint(50.60659,30.45436, 20_000)));
+                new SimpleCirclePoint(50.60659, 30.45436, 200)));
     }
 }

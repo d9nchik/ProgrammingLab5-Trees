@@ -23,7 +23,7 @@ public interface DistanceCalculable extends Serializable {
      * */
     default double distance(DistanceCalculable distanceCalculable) {
         //We know lat and lon, so we will use "harvesine"
-        return harvesine(getLat(), getLon(), getLat(), getLon());
+        return harvesine(getLat(), getLon(), distanceCalculable.getLat(), distanceCalculable.getLon());
     }
 
     double getLat();
