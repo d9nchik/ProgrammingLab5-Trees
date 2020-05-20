@@ -1,7 +1,8 @@
 package com.work;
 
 @SuppressWarnings("unused")
-public class PointOnMap implements DistanceCalculable{//Class should be immutable
+public class PointOnMap implements DistanceCalculable {//Class should be immutable
+    private static int count = 0;
     private final double lat;
     private final double lon;
     private final String type;
@@ -51,13 +52,7 @@ public class PointOnMap implements DistanceCalculable{//Class should be immutabl
 
     @Override
     public String toString() {//TODO: make it better
-        return "PointOnMap{" +
-                "lat=" + lat +
-                ", lon=" + lon +
-                ", type='" + type + '\'' +
-                ", subType='" + subType + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        count++;
+        return ("\n" +count+ ") Точка на карте: "+"\nШирота: " + lat + "\nДолгота: " + lon + "\nТип: " + type + "\nПодтип: " + subType + "\nНазвание: " + name + "\nАдрес: " + address);
     }
 }

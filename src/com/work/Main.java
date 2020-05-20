@@ -8,7 +8,6 @@ public class Main {
         final Node node = CSVReader.readCSV(new File("src/com/work/ukraine_poi.csv"));
         //TODO: test ability of serializing structure
         assert node != null;
-        System.out.println(node.getValues(
-                new SimpleCirclePoint(50.60659, 30.45436, 200)));
+        System.out.println(node.getValues(new SimpleCirclePoint(50.60659, 30.45436, 3000)));
     }
 }
