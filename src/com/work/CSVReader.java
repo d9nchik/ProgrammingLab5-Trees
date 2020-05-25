@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class CSVReader {
     private CSVReader() {
     }
-
     public static Node readCSV(File file) {
         try (Scanner input = new Scanner(new BufferedInputStream(new FileInputStream(file)))) {
             Node node = new Node();
