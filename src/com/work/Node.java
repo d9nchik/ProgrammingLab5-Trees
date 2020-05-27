@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Node implements DistanceCalculable{
+public class Node implements DistanceCalculable {
     private final static int MAXIMUM_POINTS = 500;//BTree is cool, is it?
     private DistanceCalculable[] abstractNodes = new DistanceCalculable[MAXIMUM_POINTS + 1];
     private DistanceCalculable centralNode;
@@ -57,9 +57,9 @@ public class Node implements DistanceCalculable{
                     return abstractNodes;
                 else {
                     DistanceCalculable[] temp = new DistanceCalculable[MAXIMUM_POINTS + 1];
-                    temp[0] = new Node(abstractNodes, 0, MAXIMUM_POINTS/2+1);
-                    temp[1] = new Node(abstractNodes, MAXIMUM_POINTS/2+1, MAXIMUM_POINTS);
-                    counter=2;
+                    temp[0] = new Node(abstractNodes, 0, MAXIMUM_POINTS / 2 + 1);
+                    temp[1] = new Node(abstractNodes, MAXIMUM_POINTS / 2 + 1, MAXIMUM_POINTS);
+                    counter = 2;
                     abstractNodes = temp;
                 }
             }
@@ -102,9 +102,19 @@ public class Node implements DistanceCalculable{
         }
         return abstractNodeArrayList;
     }
-    public static void outArray(ArrayList<DistanceCalculable>arr,int count){
-        for (int i = 0; i < count ; i++) {
-            System.out.println(arr.get(i));
+
+    public static void outArray(ArrayList<DistanceCalculable> arr, int count) {
+        if (count > arr.size()) {
+           outArrayALL(arr);
+        } else {
+            for (int i = 0; i < count; i++) {
+                System.out.println(arr.get(i));
+            }
+        }
+    }
+    public static void outArrayALL(ArrayList<DistanceCalculable> arr){
+        for (DistanceCalculable distanceCalculable : arr) {
+            System.out.println(distanceCalculable);
         }
     }
 }
