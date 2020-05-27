@@ -102,4 +102,9 @@ public class Node implements DistanceCalculable{
         }
         return abstractNodeArrayList;
     }
+    public static void outArray(ArrayList<DistanceCalculable>arr,int count){
+        for (int i = 0; i < count ; i++) {
+            System.out.println(arr.get(i));
+        }
+    }
 }

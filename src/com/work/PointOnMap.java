@@ -3,7 +3,6 @@ package com.work;
 import java.util.ArrayList;
 
 public class PointOnMap implements DistanceCalculable {
-    private static int count = 0;
     private final double lat;
     private final double lon;
     private final String type;
@@ -53,7 +52,6 @@ public class PointOnMap implements DistanceCalculable {
 
     @Override
     public String toString() {
-        count++;
-        return ("\n" +count+ ") Точка на карте: "+"\nШирота: " + lat + "\nДолгота: " + lon + "\nТип: " + type + "\nПодтип: " + subType + "\nНазвание: " + name + "\nАдрес: " + address);
+        return ("Точка на карте: "+"\nШирота: " + lat + "\nДолгота: " + lon + "\nТип: " + type + "\nПодтип: " + subType + "\nНазвание: " + name + "\nАдрес: " + address);
     }
 }
