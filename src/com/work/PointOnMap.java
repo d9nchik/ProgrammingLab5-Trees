@@ -1,7 +1,5 @@
 package com.work;
 
-import java.util.ArrayList;
-
 public class PointOnMap implements DistanceCalculable {
     private final double lat;
     private final double lon;
